@@ -7,4 +7,20 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title: string ='recipebook'
+  loadedFeature: string = 'recipe';
+
+  /**
+   * Sets the loadedFeature property from the event string input.
+   *
+   * @remarks
+   * As an alternative, you could just set loadedFeature in the html.
+   *
+   * @param feature - The string 'recipe' or 'shopping-list'
+   *
+   * @returns None
+   */
+  OnNavigate(feature: string): void {
+    console.log("app.component.ts:OnNavigate() --> " + feature);
+    this.loadedFeature = feature;
+  }
 }

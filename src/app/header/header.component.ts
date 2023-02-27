@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -6,4 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
+  // An emitter object to emit an event when either Recipes or Shopping List is selected in the header.
+  // Need @Output() so that the it can be listened to it from the parent component.
+  @Output() featureSelected: EventEmitter<any> = new EventEmitter<string>();
+
+  onSelect(feature: string) {
+    console.log('header.component.ts:OnSelect() --> ' + feature);
+    this.featureSelected.emit(feature);
+  }
 }
