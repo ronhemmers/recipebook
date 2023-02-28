@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Recipe } from '../../recipe.model';
 
 @Component({
@@ -7,6 +7,15 @@ import { Recipe } from '../../recipe.model';
   styleUrls: ['./recipe-item.component.css']
 })
 export class RecipeItemComponent {
-  // outside binding from recipe-list
+  // Outside binding from recipe-list
   @Input() recipe: Recipe;
+
+  // We want the recipes.component to react when an item was selected
+  // We also want outside to be able to listen to this event.
+  @Output() recipeSelected: EventEmitter<any> = new EventEmitter<void>();
+
+  onSelected() {
+    console.log("Recipe '" + this.recipe.name + "' was selected")
+    this.recipeSelected.emit();
+  }
 }
