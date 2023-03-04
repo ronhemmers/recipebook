@@ -12,7 +12,8 @@ export class RecipeListComponent implements OnInit {
     new Recipe('Test Recipe', 'This is some simple description', 'https://upload.wikimedia.org/wikipedia/commons/3/39/Recipe.jpg'),
     new Recipe('Generic Recipe', 'Another aweseome generic recipe', 'https://www.cookipedia.co.uk/wiki/images/3/39/Shrimp_cakes_-_prawn_balls_recipe.jpg')
   ];
-  @Output() recepeWasSelected: EventEmitter<any> = new EventEmitter<Recipe>();
+
+  @Output() recepeWasSelected: EventEmitter<Recipe> = new EventEmitter<Recipe>();
 
   constructor() {}
 
