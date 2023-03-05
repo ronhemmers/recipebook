@@ -11,6 +11,10 @@ export class ShoppingEditComponent {
   @ViewChild('amountInput', {static: true}) amountInputRef: ElementRef;
   @Output() ingredientAdded = new EventEmitter<Ingredient>();
 
+  // 2-way binding, only used to enable/disable the Add button
+  ingredientInput: string = '';
+  quantityInput: number = 0;
+
   /**
    * Will be called when the Add button is pressed.
    */
