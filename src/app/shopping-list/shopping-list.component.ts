@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Ingredient } from '../shared/ingredient.model'
+import { Ingredient } from '../shared/ingredient.model';
 
 @Component({
   selector: 'app-shopping-list',
@@ -15,4 +15,14 @@ export class ShoppingListComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  /**
+   * Listen to this event coming from shopping-edit component after Add button is pressed.
+   * 
+   * @param ingredient The new ingredient to add to the list
+   */
+  onIngredientAdded(ingredient: Ingredient): void {
+    console.log("ShoppingListComponent::onIngredientAdded(...)");
+    this.ingredients.push(ingredient);
+  }
 }
