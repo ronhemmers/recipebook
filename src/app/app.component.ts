@@ -20,7 +20,7 @@ export class AppComponent {
    * @returns None
    */
   OnNavigate(feature: string): void {
-    console.log("app.component.ts:OnNavigate() --> " + feature);
+    console.log("AppComponent::OnNavigate() --> " + feature);
     this.loadedFeature = feature;
   }
 }

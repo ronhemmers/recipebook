@@ -9,9 +9,11 @@ import { Ingredient } from '../../shared/ingredient.model';
 export class ShoppingEditComponent {
   @ViewChild('nameInput', {static: true}) nameInputRef: ElementRef;
   @ViewChild('amountInput', {static: true}) amountInputRef: ElementRef;
-  @Output() ingredientAdded = new EventEmitter<Ingredient>();
+  @Output() ingredientAdded: EventEmitter<Ingredient> = new EventEmitter<Ingredient>();
 
-  // 2-way binding, only used to enable/disable the Add button
+  // Notes:
+  // 2-way binding, I added this only to enable/disable the Add button,
+  // so that you can't add something without a name or an amount < 1.
   ingredientInput: string = '';
   quantityInput: number = 0;
 
