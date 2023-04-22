@@ -18,7 +18,7 @@ export class RecipeItemComponent {
    * Called when you select a recipe item.
    */
   onSelected() {
-    console.log("Recipe '" + this.recipe.name + "' was selected")
+    console.log("Recipe '" + this.recipe.name + "' was selected, emitting 'recipeSelected'")
     this.recipeSelected.emit();
   }
 }
