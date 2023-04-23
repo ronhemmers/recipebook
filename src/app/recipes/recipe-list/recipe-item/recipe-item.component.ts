@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Recipe } from '../../recipe.model';
+import { RecipeService } from '../../recipe.service';
 
 @Component({
   selector: 'app-recipe-item',
@@ -7,18 +8,18 @@ import { Recipe } from '../../recipe.model';
   styleUrls: ['./recipe-item.component.css']
 })
 export class RecipeItemComponent {
+
   // Outside binding from recipe-list
   @Input() recipe: Recipe;
 
-  // We want the recipes.component to react when an item was selected
-  // We also want outside to be able to listen to this event.
-  @Output() recipeSelected: EventEmitter<void> = new EventEmitter<void>();
+  // Need to inject the ReceipService into this class.
+  constructor(private recipeService: RecipeService) { }
 
-  /**
-   * Called when you select a recipe item.
-   */
+  // Called when you select a recipe item.
   onSelected() {
-    console.log("Recipe '" + this.recipe.name + "' was selected, emitting 'recipeSelected'")
-    this.recipeSelected.emit();
+    console.log("Recipe '" + this.recipe.name + "' was selected, calling RecipeService emitter")
+    // Call RecipeService event emitter to transfer data to another component.
+    this.recipeService.recipeSelected.emit(this.recipe);
   }
+
 }

@@ -1,10 +1,13 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Recipe } from './recipe.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipeService {
+
+  // This event emitter could be encapsulated in a method as well...
+  recipeSelected: EventEmitter<Recipe> = new EventEmitter<Recipe>();
 
   // Keep track of Recipe objects here in the recipe service instead of the recipe-list component.
   // Making it private so that you can't directly access this array from outside.
@@ -14,6 +17,8 @@ export class RecipeService {
     new Recipe('Generic Recipe', 'Another aweseome generic recipe', 'https://www.cookipedia.co.uk/wiki/images/3/39/Shrimp_cakes_-_prawn_balls_recipe.jpg')
   ];
 
+  constructor() { }
+
   getRecipes() {
     // Don't pass the object this way, this passes the array as a reference, and we don't
     // want to pass the original data around...
@@ -22,7 +27,5 @@ export class RecipeService {
     // Return the array object with slice() to make a copy of it that can be passed around.
     return this.recipes.slice();
   }
-
-  constructor() { }
 
 }

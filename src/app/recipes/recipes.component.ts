@@ -11,7 +11,16 @@ import { RecipeService } from './recipe.service';
 export class RecipesComponent implements OnInit {
   selectedRecipe: Recipe;
 
-  constructor() { }
+  // Inject the RecipeService into this class.
+  constructor(private recipeService: RecipeService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+      // Using this service for cross-component communication by using .subscribe()
+      // and an es6 (arrow) function.
+      this.recipeService.recipeSelected.subscribe(
+        (recipe: Recipe) => {
+          this.selectedRecipe = recipe;
+        }
+      );
+  }
 }
