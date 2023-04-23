@@ -34,4 +34,18 @@ export class ShoppingListService {
     this.ingredientsChanged.emit(this.ingredients.slice());
   }
 
+  // This method is called from the RecipeService to add an array of ingredients.
+  addIngredients(ingredients: Ingredient[]): void {
+    // Note, this approach to adding ingredients will cause a lot of event emitters...
+    // for (let ingredient of ingredients) {
+    //   this.addIngredient(ingredient);
+    // }
+
+    // Directly add all ingredients at once.
+    this.ingredients.push(...ingredients);
+
+    // Emit an event to broadcast that the array has been changed and pass a new copy of the array.
+    this.ingredientsChanged.emit(this.ingredients.slice());
+  }
+
 }
