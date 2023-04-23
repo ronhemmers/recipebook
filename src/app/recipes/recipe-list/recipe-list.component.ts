@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
 
@@ -7,7 +7,7 @@ import { RecipeService } from '../recipe.service';
   templateUrl: './recipe-list.component.html',
   styleUrls: ['./recipe-list.component.css']
 })
-export class RecipeListComponent {
+export class RecipeListComponent implements OnInit {
 
   // Moved the array of Recipe objects into the recipe service.
   // Now, it will initially be undefined but it will be set below.
@@ -18,7 +18,9 @@ export class RecipeListComponent {
   // Need to inject the recipes service into here since that's where the data will
   // come from.  And use private to use typescript shortcut to assign the property
   // with the same name.
-  constructor(private recipeService: RecipeService) {
+  constructor(private recipeService: RecipeService) { }
+
+  ngOnInit() {
     // get a copy of the recipes array from the RecipeService.
     this.recipes = this.recipeService.getRecipes();
   }
