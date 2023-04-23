@@ -20,11 +20,12 @@ export class ShoppingListService {
   // Return the array object with slice() to make a copy of it that can be passed around,
   // and not give access to the original array data.
   getIngredients() {
+    console.log("ShoppingListService::getIngredients()");
     return this.ingredients.slice();
   }
 
   addIngredient(ingredient: Ingredient): void {
-    console.log("ShoppingListComponent::onIngredientAdded(...)");
+    console.log("ShoppingListService::addIngredient()");
 
     // Update the ingredients array.
     this.ingredients.push(ingredient);
