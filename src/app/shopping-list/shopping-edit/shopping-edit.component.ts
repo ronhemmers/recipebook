@@ -1,15 +1,15 @@
-import { Component, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { Ingredient } from '../../shared/ingredient.model';
+import { ShoppingListService } from '../shopping-list.service';
 
 @Component({
   selector: 'app-shopping-edit',
   templateUrl: './shopping-edit.component.html',
   styleUrls: ['./shopping-edit.component.css']
 })
-export class ShoppingEditComponent {
+export class ShoppingEditComponent implements OnInit {
   @ViewChild('nameInput', {static: true}) nameInputRef: ElementRef;
   @ViewChild('amountInput', {static: true}) amountInputRef: ElementRef;
-  @Output() ingredientAdded: EventEmitter<Ingredient> = new EventEmitter<Ingredient>();
 
   // Notes:
   // 2-way binding, I added this only to enable/disable the Add button,
@@ -17,16 +17,22 @@ export class ShoppingEditComponent {
   ingredientInput: string = '';
   quantityInput: number = 0;
 
-  /**
-   * Will be called when the Add button is pressed.
-   */
+  // Injecting the ShoppigListService into this class.
+  constructor(private shoppingListService: ShoppingListService) { }
+
+  ngOnInit(): void {
+  }
+
+  // Will be called when the Add button is pressed.
   onAddItem(): void {
-    console.log("ShoppingEditComponent::onAddItem(...)");
-    // Emit a custom event, so that the new ingredient can be added into the list in shopping-list component.
     // Using const, instead of let, because they're not going to change.
     const ingredientName: string = this.nameInputRef.nativeElement.value;
     const ingredientAmount: number = this.amountInputRef.nativeElement.value;
     const newIngredient = new Ingredient(ingredientName, ingredientAmount);
-    this.ingredientAdded.emit(newIngredient);
+
+    console.log("ShoppingEditComponent::onAddItem() [" + ingredientName + ":" + ingredientAmount + "]");
+
+    // Call the ShoppingListService to add the new ingredient.
+    this.shoppingListService.addIngredient(newIngredient);
   }
 }
